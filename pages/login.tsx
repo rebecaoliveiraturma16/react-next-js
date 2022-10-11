@@ -5,7 +5,7 @@ export default function LoginPage() {
   return (
     //jsx - TypeScript Extensible Syntax
     <>
-        <Header pesquisar="Buscar"/>
+        <Header pesquisar="Buscar" name="Rebeca Oliveira"/>
         <h1>Bem Vindo ao curso de React</h1>
     </>
   )

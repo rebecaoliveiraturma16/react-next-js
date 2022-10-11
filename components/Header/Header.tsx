@@ -1,7 +1,9 @@
-import React from 'react'
-import styles from '../../styles/Header.module.css';
+import React, { useState } from 'react'
+import styles from '../../styles/Header.modules.css';
 import { css} from '@emotion/css';
 import styled from '@emotion/styled';
+import Input from '../Form/Input/Input';
+import Button from '../Form/Button/Button';
 
 const HeaderPage = styled.header`
   background-color: #e1e1e1;
@@ -14,24 +16,25 @@ const HeaderPage = styled.header`
 `
 
 
-`
-const Button = styled.button`
-  width: 100px;
-  line-height: 30px;
-  border:none;
-  border-radius: 10px;
-  margin-left: 10px;
-  &:hover{
-    background-color: #ddd;
-    cursor: pointer;
-  }
-`
+
+// type UserType = {
+//   email: string;
+//   password: string;
+// }
+
+// type User = HeaderProps | UserType;
+
+// interface IHeaderProps  {
+//   menu?: Array<string>;
+//   pesquisar?: string;
+//   name ?: string;
+// }
+
 type HeaderProps = {
   menu?: Array<string>;
   pesquisar?: string;
+  name ?: string;
 }
-
-
 //CSS
 //5 maneiras diferentes de utilizar CSS.
 //1. Importar o CSS no arquivo .tsx
@@ -45,6 +48,12 @@ type HeaderProps = {
 //5. Usando alguma biblioteca de estilização
 //Ex: Material-UI - 4 usa Styled Componentes - 5 usa Emotion CSS
 export default function Header(props:HeaderProps) {
+
+  //Sempre que vamos trabalhar com state, para armazenar valores
+  // temos os getters & setters. get para recuperar valores e set para alterar valores
+  const [userAuth, setUserAuth] = useState<boolean>(true);
+  const [nameUser, setNameUser] = useState<string | undefined>(props.name);
+
   return (
     // <header className={styles['menu-site']}>  // - utilizando CSS modules
     <HeaderPage>
@@ -68,6 +77,10 @@ export default function Header(props:HeaderProps) {
       </ul>
       
     </nav>
+
+    {userAuth && (<div>
+      <span>Seja bem vindo {nameUser?nameUser:" visitante"}</span>
+    </div>) }
     <div>
       <Input type="text" placeholder="Pesquisar"/>
       <Button>{props.pesquisar? props.pesquisar:"Search"}</Button>
